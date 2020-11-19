@@ -1,0 +1,141 @@
+<!--pages/img/img.wxml-->
+
+<!--------------------------------------------------------------------------------------------
+text相当于span标签，view相当于div标签，默认块级元素即换行 -->
+<text>pages/img/img.wxml</text>
+<!-- 使用模板语法的情况：1.js页面内的变量调用，2.传递实参给js页面，3某些字符串属性但要进行非字符串的操作 -->
+<view>{{msg}}</view>
+
+<!--------------------------------------------------------------------------------------------
+三元表达式 -->
+<view>{{10%2===0 ? "偶数" : "奇数"}}</view>
+
+<!--------------------------------------------------------------------------------------------
+列表循环，块级作用域命名:i命名，索引命名，和v-for一样，需要个key来绑定每个条目，可以是任意属性，
+但需满足这是i的唯一标识，index和item不取名默认index，item -->
+<view wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+  索引: {{index}}
+  值: {{item.name}}
+  id: {{item.id}}
+</view>
+
+<!--------------------------------------------------------------------------------------------
+列表循环对象 -->
+<view wx:for="{{person}}" wx:key="index">
+  索引: {{index}}
+  值: {{item}}
+</view>
+
+<!--------------------------------------------------------------------------------------------
+条件渲染 -->
+<view wx:if="true">
+  我是if
+</view>
+<view wx:elif="false">
+  我是else if
+</view>
+<!--hidden相当于v-show，不要和样式display合用，一样会显示 -->
+<view wx:else="true" hidden="true">
+  我是else
+</view>
+
+<!--------------------------------------------------------------------------------------------
+响应式绑定函数 -->
+<input type="text" bindinput="handleInput"/>
+<view>
+  {{num}}
+</view>
+
+<!--------------------------------------------------------------------------------------------
+bidntap相当于click，不能像js"handleTap(1)"直接传参，而是通过data-operation -->
+<button bindtap="handleTap" data-operation="{{1}}">+</button>
+<button bindtap="handleTap" data-operation="{{-1}}">-</button>
+
+<!--------------------------------------------------------------------------------------------
+button的open-type选项
+contact，客户对话
+share，分享当前小程序
+getPhoneNumber，企业微信功能，获取用户号码，需要绑定一函数使用
+getUserInfo，获取用户信息，和上一样，但不需要解密
+launchApp，打开对应小程序的app
+openSettiong，打开小程序内部授权页面，只能获取已经授权的设置列表，如getPhoneNumber和getUserInfo
+feedback，小程序内置的意见反馈，只能真机调试-->
+<button open-type="contact">客服</button>
+<button open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取用户信息</button>
+<button open-type="feedback">反馈</button>
+
+<!--------------------------------------------------------------------------------------------
+contact的实现流程
+1.将新建项目的appid改为官网申请的appid
+2.官网添加客服微信账号 -->
+<view class="fff"></view>
+
+<!--------------------------------------------------------------------------------------------
+user-select文本是否可选，该属性会使文本节点显示为inline-block
+decode是否解码，可解码的都在二行 -->
+<text user-select="true" decode="true">
+  how are you?
+  &nbsp; &lt; &gt; &amp; &apos; &ensp; &emsp;
+</text>
+
+<!--------------------------------------------------------------------------------------------
+图片，小程序打包有2m限制，因此无法使用本地静态资源，请使用图床 -->
+<!-- <image src="https://s3.ax1x.com/2020/11/19/Du0VxK.jpg" alt=""></image> -->
+
+<!--------------------------------------------------------------------------------------------
+轮播图 -->
+<swiper autoplay interval="3000" circular>
+  <swiper-item><image src="https://s3.ax1x.com/2020/11/19/Du0VxK.jpg"></image></swiper-item>
+  <swiper-item><image src="https://s3.ax1x.com/2020/11/19/DurpqS.jpg"></image></swiper-item>
+  <swiper-item><image src="https://s3.ax1x.com/2020/11/19/DuDzKf.jpg"></image></swiper-item>
+  <swiper-item><image src="https://s3.ax1x.com/2020/11/19/DurSr8.jpg"></image></swiper-item>
+</swiper>
+
+<!--------------------------------------------------------------------------------------------
+页面跳转，类似a抱歉，被tabbar锁定得页面无法跳转 -->
+<navigator url="/pages/notebook/notebook" open-type="redirect">首页</navigator>
+<navigator url="/pages/img/img" open-type="redirect"></navigator>
+
+<!--------------------------------------------------------------------------------------------
+target选项：
+self，自己的小程序
+miniprogram，跳转到其他小程序 -->
+<!-- open-type选项：
+navigator，不关闭当前页面跳转除tababar的页面
+redirect，关闭当前页面，跳转除tabbar的页面
+switchTab，关闭当前除tabbar以外的页面，转换到其他tabbar页面
+reLaunch，随便跳
+navigateBack，backroute
+exit，退出其他小程序，target="miniProgram生效" -->
+
+<!--------------------------------------------------------------------------------------------
+相当于v-html，富文本标签
+html为html节点的字符串形式，data中定义
+第二种即是list对象形式 -->
+<rich-text nodes="{{html}}"/>
+
+<!--------------------------------------------------------------------------------------------
+小程序自带图标 -->
+<icon type="success" size="" color=""></icon>
+
+<!--------------------------------------------------------------------------------------------
+radio，必须和raido-group绑定使用 -->
+<radio-group bindchange="handleGender">
+  <radio value="男" checked="true">男</radio>
+  <radio value="女">女</radio>
+</radio-group>
+<view>你是{{gender}}性</view>
+
+<!--------------------------------------------------------------------------------------------
+checkbox，-->
+<checkbox-group bindchange="handleList">
+  <checkbox value="{{item.id}}" wx:for="{{checkboxlist}}" wx:key="{{index}}">
+    {{item.name}}
+  </checkbox>
+</checkbox-group>
+<view>你选中了：{{checkedlist}}</view>
+
+<!--------------------------------------------------------------------------------------------
+组件：1.新建组件相关文件，文件名最好和文件夹一致，2.在要使用组件的pages的json中注册组件的名字和路径，路径url不包括后缀名
+3.模板标签使用组件 -->
+<Tabs></Tabs>

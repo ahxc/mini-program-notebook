@@ -1,0 +1,20 @@
+/* 小程序不支持less，需要在vs中安装easy less插件，然后在
+vs全局配置中配置 */
+/* "less.compile": {
+  "outExt": ".wxss"// less转wxss
+} */
+/* 在编写过程中会自动转换 */
+view {
+  color: blue;
+}
+/* less导入 */
+
+image {
+  width: 100%;
+  height: 100%;
+}
+
+swiper {
+  width: 100%;
+  height: 300px;
+}

@@ -1,0 +1,23 @@
+/* pages/img/img.wxss */
+
+/* 
+以iphone几为标准设计稿750px
+屏宽 750x，1px=1rpx
+屏宽 375x，1px=0.5px
+
+存在一个宽度414或未知的page，存在一个元素100px，去实现不同宽度的适配
+page px = 750px
+1px = 750rpx/page
+100px = 750rpx*100/page
+其实就是元素在页面中所占比例乘以新屏幕比例
+ */
+ /* 字面量与单位不要留空格 */
+ .fff {
+  width: calc(750rpx*100/375);
+  height: 500rpx;
+  background-color: black;
+}
+
+view {
+  color: blue;
+}
