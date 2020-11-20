@@ -127,9 +127,9 @@ radio，必须和raido-group绑定使用 -->
 <view>你是{{gender}}性</view>
 
 <!--------------------------------------------------------------------------------------------
-checkbox，-->
+checkbox -->
 <checkbox-group bindchange="handleList">
-  <checkbox value="{{item.id}}" wx:for="{{checkboxlist}}" wx:key="{{index}}">
+  <checkbox value="{{item.id}}" wx:for="{{checkboxlist}}" wx:key="index">
     {{item.name}}
   </checkbox>
 </checkbox-group>
@@ -138,4 +138,16 @@ checkbox，-->
 <!--------------------------------------------------------------------------------------------
 组件：1.新建组件相关文件，文件名最好和文件夹一致，2.在要使用组件的pages的json中注册组件的名字和路径，路径url不包括后缀名
 3.模板标签使用组件 -->
-<Tabs></Tabs>
+<!-- 父传子和vue类似，将hello传给子properties
+子传父，this.$emit改为了this.triggerEvent，这里发射的是ebody，然后绑定给父的ebodyHandle方法 -->
+<Tabs a="hello world" bind:ebody="ebodyHandle">
+  插入插槽的内容
+</Tabs>
+
+<!--------------------------------------------------------------------------------------------
+生命周期：
+页面生命周期在各自page页面的js文件中，全局应用生命周期在一级目录app.js中 -->
+
+<!--------------------------------------------------------------------------------------------
+页面旋转
+在全局app.json window字段中加入，"pageOrientation": "auto"，或者只想要单个页面旋转则加入pages的json文件中 -->

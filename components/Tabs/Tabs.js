@@ -4,7 +4,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    a: String,
   },
 
   /**
@@ -29,6 +29,7 @@ Component({
       this.setData({
         cindex: i
       })
+      this.triggerEvent('ebody', i)
     }
   }
 })

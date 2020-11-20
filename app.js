@@ -1,5 +1,6 @@
-//app.js
+// app应用生命周期
 App({
+  // 1.onLaunch应用第一次启动就会触发的事件
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -31,6 +32,21 @@ App({
           })
         }
       }
+    })
+  },
+  // 2.应用被用户看到时触发，可在重新看到时做一些页面效果重置如swiper，定时器
+  onShow() {
+  },
+  // 3.应用被被隐藏时触发，可以停止一些动画效果如swiper，定时器
+  onHide() {
+  },
+  // 4.应用的代码发生报错触发，通过异步发送到后台，下次升级可参考
+  onError(err) {
+  },
+  // 5.页面找不到时就会触发，如果页面找不到可以通过js的方式重新跳转第二个首页，不能跳到tabbar，和导航组件类似
+  onPageNotFound() {
+    wx.navigateTo({
+      url: 'url',
     })
   },
   globalData: {
