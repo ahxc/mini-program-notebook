@@ -1,9 +1,9 @@
 /* pages/img/img.wxss */
-
+ /* 小程序样式不支持通配符 */
 /* 
 以iphone几为标准设计稿750px
 屏宽 750x，1px=1rpx
-屏宽 375x，1px=0.5px
+屏宽 375x，1px=0.5rpx
 
 存在一个宽度414或未知的page，存在一个元素100px，去实现不同宽度的适配
 page px = 750px

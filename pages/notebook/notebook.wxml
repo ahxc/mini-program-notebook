@@ -47,7 +47,7 @@ text相当于span标签，view相当于div标签，默认块级元素即换行 -
 </view>
 
 <!--------------------------------------------------------------------------------------------
-bidntap相当于click，不能像js"handleTap(1)"直接传参，而是通过data-operation -->
+bindtap相当于click，不能像js"handleTap(1)"直接传参，而是通过data-operation -->
 <button bindtap="handleTap" data-operation="{{1}}">+</button>
 <button bindtap="handleTap" data-operation="{{-1}}">-</button>
 
@@ -151,3 +151,14 @@ checkbox -->
 <!--------------------------------------------------------------------------------------------
 页面旋转
 在全局app.json window字段中加入，"pageOrientation": "auto"，或者只想要单个页面旋转则加入pages的json文件中 -->
+
+<!--------------------------------------------------------------------------------------------
+本地存储：
+web: localStorage.setItem("key", "value")
+	localStorage.getItem("key")
+小程序：wx.setStorageSync("key", "value")
+	wx.getStorageSync("key")
+
+web: 不管存入什么数据，都会调用toString()，把数据变成字符串，即json格式
+小程序：所存即所得
+-->
