@@ -138,8 +138,10 @@ checkbox -->
 <!--------------------------------------------------------------------------------------------
 组件：1.新建组件相关文件，文件名最好和文件夹一致，2.在要使用组件的pages的json中注册组件的名字和路径，路径url不包括后缀名
 3.模板标签使用组件 -->
-<!-- 父传子和vue类似，将hello传给子properties
-子传父，this.$emit改为了this.triggerEvent，这里发射的是ebody，然后绑定给父的ebodyHandle方法 -->
+<!-- 父传子和vue类似，将hello传给子properties，类型要正确，不能用[]等符号
+子传父，this.$emit改为了this.triggerEvent("ebody", i)，这里发射的是ebody，然后绑定给父的ebodyHandle方法
+ebodyHandle接收i为包裹的事件对象，i存在于obj.detail中
+ -->
 <Tabs a="hello world" bind:ebody="ebodyHandle">
   插入插槽的内容
 </Tabs>
@@ -158,7 +160,54 @@ web: localStorage.setItem("key", "value")
 	localStorage.getItem("key")
 小程序：wx.setStorageSync("key", "value")
 	wx.getStorageSync("key")
+注意：sync是getStorage的同步版本，因为如果set后立马get，异步会造成无法get到数据
 
 web: 不管存入什么数据，都会调用toString()，把数据变成字符串，即json格式
 小程序：所存即所得
+-->
+
+<!--------------------------------------------------------------------------------------------
+微信支付：
+哪些账户可以实现微信支付功能：
+1.企业账号
+2.企业账号中给开发者添加白名单
+
+具体步骤：
+1.判断缓存中有没有token，没有则跳转授权页面获取token
+
+2.创建订单编号。（先要获取线上用户的token，由以下信息加密形成，getuserinfo和login，它包括：
+1.encryptedData，
+2.rawData，
+3.iv，
+4.signature
+5.code---login，以上getuserinfo）
+
+3.拉去微信支付并完成，手动删除购买过的商品和缓存
+
+4.跳转页面：可以是成功购买或其他页面
+ -->
+
+<!--------------------------------------------------------------------------------------------
+防抖节流：
+  防抖：一般输入框等v-model类型，节流：下拉刷新和上拉加载的请求类型 -->
+<script>
+// 事先顶一个定时器timer，防抖封装见max-的utils
+clearTimeout(this.timer);
+this.timer = setTimeout(() => {
+	this.getSearch({query: value})
+}, 1000);
+</script>
+
+<!--------------------------------------------------------------------------------------------
+意见反馈页面：
+小程序有自带反馈，但为了整个app风格统一，最好还是定制
+
+项目发布：
+1.去掉url不校验勾选，把url加入平台中的白名单
+2.id换为appid
+3.大小不超过2m
+4.版本说明 1.1.1 分别表示大版本 重要功能 细节和优化
+  分别对应版本升级，特性更新，修订补丁
+5.上传体验版到开放平台
+6.平台提交审核，转正
 -->
